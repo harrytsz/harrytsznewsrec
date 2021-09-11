@@ -30,6 +30,10 @@ Cocos Creator 将整套手机页游解决方案整合在了编辑器工具里，
 
 ![](https://pic.imgdb.cn/item/613c6cdb44eaada739d3b945.jpg)
 
+![](https://pic.imgdb.cn/item/613c6e8644eaada739d6b2ad.jpg)
+
+其中，控制首页精灵旋转逻辑的代码如下:
+
 ```javascript
 // Learn cc.Class:
 //  - https://docs.cocos.com/creator/manual/en/scripting/class.html
