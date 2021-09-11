@@ -4,7 +4,7 @@
 
 - 本文档介绍多模态新闻推荐系统的主要架构以及组件
 ![](https://img.shields.io/badge/MIT-newsrecsys-red.svg)
-[](https://github.com/harrytsz/)
+[HOME](https://github.com/harrytsz/)
 
 ![](https://img.shields.io/badge/download-1K-brightgreen.svg)
 [GitHub](https://github.com/harrytsz/)
