@@ -317,15 +317,6 @@ Jane Doe
        <pagnation v-if="total>10" :total="total" :current-page="current" :refresh="refresh" @pagechange="pagechange"></pagnation>
      </div>
      <!--主展示区的右边栏-->
-     <div class="mainRight">
-       <h3 class="hotTitle">{{hot_newsData.cate_name}}</h3>
-       <ul class="rightContent">
-         <li class="animated fadeInRight" style="animation-duration:1s;animation-delay:0s" v-for="item in hot_newsData.news" @click="newsDesc({'newid':item.new_id,'cateid':newsData.cate_id})" :key="item.new_id">
-           <span>{{item.new_title}}</span>
-           <i>{{item.new_time}}</i>
-         </li>
-       </ul>
-     </div>
    </div>
    <!--引入尾部组件，包含尾部信息-->
    <newfooter class="footer"></newfooter>
@@ -471,24 +462,6 @@ export default {
       this.moreRecommon = true
       this.morebtn = false
     },
-    // 分页
-    pagechange (currentPage) {
-      this.refresh = false
-      this.page = currentPage
-      // 滚到顶部，注意不在 window 而在 document.documentElement
-      document.documentElement.scrollTop = 0
-      document.body.scrollTop = 0
-      // 获取列表，可根据后端要求改变 page 的方式
-      this.getCateNews({'pageid': this.page, 'cateid': this.isActive})
-    },
-    // 无序字典 news 排序
-    compareDescSort: function (property) {
-      return function (a, b) {
-        var value1 = a[property]
-        var value2 = b[property]
-        return value2 - value1
-      }
-    }
   },
   mounted () {
     this.getCateNews({'cateid': '2'})
@@ -518,14 +491,206 @@ export default {
     background-color: #fff;  /*新闻显示区域背景颜色*/
     display: flex;
   }
-  .mainContent {
-    width: 100%;
-    display: flex;
-    box-sizing: border-box;
-    flex: 1;
+</style>
+```
+
+### 新闻展示页面
+
+```html
+<template>
+  <div class="newsContent">
+    <new-header @onGetnews="returnMain" :active="newCateId"></new-header>
+    <div class="mainNews animated zoomIn">
+      <h3 class="newsTitle">{{newDesc.new_title}}</h3>
+      <span class="newsAttribute">
+        <el-button type="info" size="mini">{{newDesc.new_time}}</el-button>
+        <el-button type="primary" size="mini" icon="el-icon-map-location">{{newDesc.new_cate}}</el-button>
+        <el-badge :value="newDesc.new_seenum" class="item">
+          <el-button type="success" size="mini" icon="el-icon-view">浏览次数</el-button>
+        </el-badge>
+        <el-badge :value="newDesc.new_disnum" class="item">
+          <el-button type="warning" size="mini" icon="el-icon-chat-dot-square">评论次数</el-button>
+        </el-badge>
+        <el-badge class="item">
+          <el-button type="danger"  icon="el-icon-microphone" size="mini" @click="playVoice">语音播报</el-button>
+          <el-button type="danger"  icon="el-icon-turn-off-microphone" size="mini" @click="handleStop">停止播报</el-button>
+        </el-badge>
+      </span>
+      <div class="news" v-html="newDesc.new_content">
+      </div>
+      <el-row class="Info">
+          <i class="el-icon-star-on" style="color: #55a532">收藏</i>
+        <i class="el-icon-success" style="color: #55a532">点赞</i>
+          <i class="el-icon-share" style="color: #55a532">分享</i>
+      </el-row>
+      <div class="discuss">
+        <h3>评论</h3>
+        <el-input
+          class="discussContent"
+          type="textarea"
+          :rows="2"
+          placeholder="请输入内容"
+          v-model="textarea">
+        </el-input>
+        <el-row class="btndiscuss">
+          <el-button type="primary" icon="el-icon-edit" circle></el-button>
+          <el-button type="success" icon="el-icon-circle-check" @click="dis_submit" circle></el-button>
+          <el-button type="danger" icon="el-icon-delete" @click="dis_delete" circle></el-button>
+        </el-row>
+        <div class="discontent" >
+          <li v-for="(dis,idx) in disContents" :key="idx" :value="dis">
+            {{dis}}
+          </li>
+        </div>
+      </div>
+    </div>
+    <div class="mainRight animated fadeInRight" style="animation-duration:1s;animation-delay:0.5s">
+      <h3 class="hotTitle">相似推荐</h3>
+      <ul class="rightContent">
+        <li v-for="item in newDesc.new_sim" @click="newsDesc({'newid':item.new_id,'cateid':item.new_cate})" :key="item.new_id">
+          <span>{{item.new_title}}</span>
+          <i>{{item.new_time}}</i>
+        </li>
+      </ul>
+    </div>
+  </div>
+</template>
+
+<script>
+import {getNewsData} from '../router/apis'
+import Header from './Header'
+// 语音播报
+const synth = window.speechSynthesis
+const msg = new SpeechSynthesisUtterance()
+
+export default {
+  name: 'News',
+  data () {
+    return {
+      value: '3',
+      textarea: '',
+      newDesc: {},
+      newCateId: '',
+      counter: 0,
+      disContents: {}
+    }
+  },
+  components: {
+    'new-header': Header
+  },
+  methods: {
+    // 展示评论
+    display_disContent () {
+      if (this.disContents.size()) {
+        console.log(this.disContents[0])
+      }
+    },
+
+    // 提交评论按钮，评论数加1
+    dis_submit () {
+      this.counter += 1
+      this.disContents.append(this.textarea)
+    },
+
+    // 新闻内容语音播报
+    playVoice () {
+      // console.log(this.newDesc.new_content)
+      this.handleSpeak(this.newDesc.new_content) // 传入需要播放的文字
+    },
+
+    // 语音播报的函数
+    handleSpeak (text) {
+      msg.text = text // 文字内容: 小朋友，你是否有很多问号
+      msg.lang = 'zh-CN' // 使用的语言:中文
+      msg.volume = 1 // 声音音量：1
+      msg.rate = 1 // 语速：1
+      msg.pitch = 1 // 音高：1
+      synth.speak(msg) // 播放
+    },
+    // 语音停止
+    handleStop (e) {
+      msg.text = e
+      msg.lang = 'zh-CN'
+      synth.cancel(msg)
+    },
+    getNews: function (option) {
+      this.loading('加载中。。。')
+      option.userName = this.$store.state.vuexlogin.userName
+      getNewsData(option).then((res) => {
+        this.$layer.closeAll()
+        if (!res.code) {
+          this.$children[0].layout()
+        } else {
+          res.new_time = this.timeFormat(res.new_time)
+          res.new_sim.forEach(item => {
+            item.new_time = this.timeFormat(item.new_time)
+          })
+          res.new_content = this.returnline(res.new_content, '\\n', '</br>')
+          this.newDesc = res
+        }
+      }, (err) => {
+        this.$layer.msg(err)
+      })
+    },
+    returnMain: function (option) {
+      this.$router.push({name: 'home', params: option})
+    },
+  },
+  mounted () {
+    var newId = this.getUrlparams(window.location.href).newid
+    this.newCateId = this.getUrlparams(window.location.href).cateid
+    this.getNews({'newid': newId})
   }
-  .mainLeft {
-    width: 60%;
+}
+</script>
+
+<style scoped="scoped">
+  .newsContent {
+    width: 100%;
+    box-sizing: border-box;
+    overflow: auto;
+  }
+  .mainNews {
+    width: 70%;
+    float: left;
+    padding: 20px;
+    box-sizing: border-box;
+    padding-top: 0;
+  }
+  .newsTitle {
+    font-size: 30px;
+    line-height: 40px;
+    margin: 20px 0;
+    font-weight: 600;
+  }
+  .newsAttribute {
+    display: block;
+    font-size: 18px;
+    color: #999;
+    height: 20px;
+    padding: 1px;
+    flex: 1;
+    text-align: right;
+    margin-right: 100px;
+  }
+  .news {
+    color: #222222;
+    font-size: 18px;
+    line-height: 30px;
+    text-space: 2px;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  .mainRight {
+    width: 30%;
+    float: right;
+  }
+  .mainRight > h3 {
+    width: 100%;
+    padding: 10px;
+    margin-top: 15px;
+    background: #63a35c;
+    vertical-align: middle;
     box-sizing: border-box;
   }
 </style>
