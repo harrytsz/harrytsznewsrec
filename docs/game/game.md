@@ -45,28 +45,70 @@ Cocos Creator 将整套手机页游解决方案整合在了编辑器工具里，
 //  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 cc.Class({
     extends: cc.Component,
-    // LIFE-CYCLE CALLBACKS:
-    // onLoad () {},
     properties: {
         logo: cc.Sprite,
+        dialog: cc.Label,
+        particle:{
+            default:null,
+            type:cc.ParticleSystem,  // 粒子火箭尾巴特效
+        },
+    },
+    // LIFE-CYCLE CALLBACKS:
+    onLoad () {
+        // //触摸结束事件
+        // this.node.parent.on(cc.Node.EventType.TOUCH_END, this.onTouchEnd, this);
     },
     start () {
-        var action = cc.repeatForever(
-            cc.sequence(
-                cc.rotateBy(2, 90),
-                cc.rotateBy(2, -90),
-            )
-            // cc.rotateBy(2, 360),
-        )
-        this.node.runAction(action);
-        setTimeout(() => {
-            this.node.stopAction(action);
-            console.log("Finishing")
-        }, 4000);
-        // this.node.runAction(cc.rotateBy(1, 90));
-        // this.node.runAction(cc.rotateBy(1, -90));
+        // var str = "Hi, Welcome!!!";
+        this.particle.stopSystem();  // 关闭粒子效果
+        this.dialog.string = "Hi, Welcome to my world!";
+        this.scheduleOnce(function () {
+            // this.dialog.string = str;
+            this.setText();
+            // this.dialog.string = "";
+            this.closeDialog();
+        }, 2);
+
     },
-    // update (dt) {},
+    closeDialog: function () {
+        this.scheduleOnce(function () {
+            this.dialog.node.active = false;
+            this.logo.node.active = false;
+        }, 6);
+    },
+    setText: function () {
+        var str = "欢迎您 " + "\n希望您在这里度过一段愉快的时光";
+        var j = 0;
+        this.dialog.string = "";
+        this.schedule(function () {
+            this.dialog.string += str[j];
+            j++;
+        }, 0.1, str.length - 1, 0.2);
+    },
+    rocketUp: function() {
+        // console.log(this.node.getPosition().x);
+        // 打开粒子效果
+        this.particle.resetSystem();
+        // 移动指定距离
+        var mby = cc.moveBy(2,cc.v2(0,200));
+        this.node.runAction(mby);
+    },
+    btn_click () {
+        // this.dialog.string = "";
+        // var str = "Bye!!!";
+        this.rocketUp();
+        // this.dialog.string = str;
+        this.scheduleOnce(function (f) {
+            // window.location.href = "http://www.baidu.com";
+            // 创建新场景
+            cc.director.loadScene('home');
+        }, 2);
+    },
+    // update (dt) {
+    //
+    // },
+    //this.particle.stopSystem();//停止播放
+    // this.particle.resetSystem();//重新启用
 });
 ```
 
