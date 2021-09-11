@@ -15,4 +15,4 @@
 ![](https://img.shields.io/badge/version-v0.0.1-blue.svg)    
 
 [GitHub](https://github.com/harrytsz/)
-[开始阅读](?id=多模态新闻推荐系统)
+[开始阅读](?id=网站引导页面)
