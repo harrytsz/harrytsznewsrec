@@ -8,7 +8,7 @@
 ![](https://pic.imgdb.cn/item/613ca5ce44eaada7394ac4ff.jpg)
 
 ##### 人脸识别登录
-![](https://pic.imgdb.cn/item/613cadc144eaada739736e05.jpg)
+![](https://pic.imgdb.cn/item/613cb41b44eaada7399327c4.jpg)
 ![](https://pic.imgdb.cn/item/613cb22844eaada7398a047e.jpg)
 
 ### 新闻页
