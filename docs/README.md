@@ -6,7 +6,7 @@
 
 ![](https://pic.imgdb.cn/item/613c57c844eaada739ac3bd9.jpg)
 ![](https://pic.imgdb.cn/item/613c59a544eaada739aff61c.jpg)
-<video id="video" controls="" preload="none" poster="http://img.blog.fandong.me/2017-08-26-Markdown-Advance-Video.jpg">
+![Sep-11-202115-56-37](https://gitee.com/harrytsz/harrytszBlogPics/raw/master/uPic/Sep-11-2021 15-56-37.gif)
 
 
 ## 快速入门
