@@ -141,3 +141,6 @@ Cocos Creator 包含游戏引擎、资源管理、场景编辑、游戏预览和
 
 从图中我们可以看出，编辑器是由 Electron 驱动再结合引擎所搭建的开发环境，引擎则负责提供许多开发上易于使用的组件和适配各平台的统一接口。
 
+### 个人简历网页
+![](https://pic.imgdb.cn/item/613ccb0344eaada739d2306f.jpg)
+![](https://pic.imgdb.cn/item/613ccb8b44eaada739d35cce.jpg)
