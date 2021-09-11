@@ -149,3 +149,24 @@ new Vue({
 <div align="center">
 <img src="https://cn.vuejs.org/images/lifecycle.png"  height="1100" width="600">
 </div>
+
+
+### 条件渲染 v-if
+
+v-if 指令用于条件性地渲染一块内容。这块内容只会在指令的表达式返回 truthy 值的时候被渲染。
+
+<h1 v-if="awesome">Vue is awesome!</h1>
+
+也可以用 v-else 添加一个“else 块”：
+
+<h1 v-if="awesome">Vue is awesome!</h1>
+<h1 v-else>Oh no 😢</h1>
+
+在 <template> 元素上使用 v-if 条件渲染分组
+因为 v-if 是一个指令，所以必须将它添加到一个元素上。但是如果想切换多个元素呢？此时可以把一个 <template> 元素当做不可见的包裹元素，并在上面使用 v-if。最终的渲染结果将不包含 <template> 元素。
+
+<template v-if="ok">
+  <h1>Title</h1>
+  <p>Paragraph 1</p>
+  <p>Paragraph 2</p>
+</template>
