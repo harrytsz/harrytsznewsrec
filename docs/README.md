@@ -6,7 +6,7 @@
 
 ![](https://pic.imgdb.cn/item/613c57c844eaada739ac3bd9.jpg)
 ![](https://pic.imgdb.cn/item/613c59a544eaada739aff61c.jpg)
-![](https://gitee.com/harrytsz/harrytszBlogPics/raw/master/uPic/Sep-11-2021 15-56-37.gif)
+![home](https://gitee.com/harrytsz/harrytszBlogPics/raw/master/uPic/home.gif)
 
 ## 快速入门
 
