@@ -22,7 +22,7 @@
 
 #### Django 后台管理
 
-![](https://pic.imgdb.cn/item/613cac0e44eaada7396ac276.jpg)
+![](https://pic.imgdb.cn/item/613cb78444eaada739a46754.jpg)
 ![](https://pic.imgdb.cn/item/613cad3b44eaada73970c96d.jpg)
 
 ### MySQL
