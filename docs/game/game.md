@@ -17,6 +17,8 @@ Cocos Creator 将整套手机页游解决方案整合在了编辑器工具里，
 
 将图片、声音等资源拖拽到编辑器的 资源管理器 面板中，即可完成资源导入。
 
+![](https://pic.imgdb.cn/item/613c6fc944eaada739d90b62.jpg)
+
 此外，你也可以在编辑器中直接创建场景、预制、动画、脚本、粒子等各类资源。
 
 ![](https://pic.imgdb.cn/item/613c6c8b44eaada739d32900.jpg)
