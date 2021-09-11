@@ -27,8 +27,7 @@ Cocos Creator 将整套手机页游解决方案整合在了编辑器工具里，
 
 项目中有了一些基本资源后，我们就可以开始搭建场景了，场景是游戏内容最基本的组织方式，也是向玩家展示游戏的基本形态。
 
-添加组件脚本，实现交互功能
-我们可以为场景中的节点挂载各种内置组件和自定义脚本组件，来实现游戏逻辑的运行和交互。包括从最基本的动画播放、按钮响应，到驱动整个游戏逻辑的主循环脚本和玩家角色的控制。几乎所有游戏逻辑功能都是通过挂载脚本到场景中的节点来实现的。
+添加组件脚本，实现交互功能。我们可以为场景中的节点挂载各种内置组件和自定义脚本组件，来实现游戏逻辑的运行和交互。包括从最基本的动画播放、按钮响应，到驱动整个游戏逻辑的主循环脚本和玩家角色的控制。几乎所有游戏逻辑功能都是通过挂载脚本到场景中的节点来实现的。其中，最重要的几个概念如：[Sprite](https://docs.cocos.com/creator/api/zh/classes/Sprite.html)、[Label](https://docs.cocos.com/creator/manual/zh/components/label.html)、[碰撞组件](https://docs.cocos.com/creator/manual/zh/physics/collision/edit-collider-component.html)
 
 ![](https://pic.imgdb.cn/item/613c6cdb44eaada739d3b945.jpg)
 
