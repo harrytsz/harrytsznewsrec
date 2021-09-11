@@ -47,12 +47,9 @@ Cocos Creator 包含游戏引擎、资源管理、场景编辑、游戏预览和
 
 以下，是 Cocos Creator 的技术架构图
 
-Cocos Creator structure editor
+![](https://pic.imgdb.cn/item/613c69d444eaada739ce4b75.jpg)
 
-图一
-
-Cocos Creator structure engine
-图二
+![](https://pic.imgdb.cn/item/613c69ff44eaada739ce9832.jpg)
 
 从图中我们可以看出，编辑器是由 Electron 驱动再结合引擎所搭建的开发环境，引擎则负责提供许多开发上易于使用的组件和适配各平台的统一接口。
 
