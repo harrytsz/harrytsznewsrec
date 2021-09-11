@@ -2,6 +2,15 @@
 
 ### 后端总揽
 
+#### 登录
+
+##### 用户名密码登录
+![](https://pic.imgdb.cn/item/613ca5ce44eaada7394ac4ff.jpg)
+
+
+### 新闻页
+![](https://pic.imgdb.cn/item/613ca61e44eaada7394c5a12.jpg)
+
 ### Django 
 ![](https://pic.imgdb.cn/item/613c80b044eaada739f51aae.jpg)
 
