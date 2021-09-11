@@ -10,6 +10,8 @@
 
 ### 新闻页
 ![](https://pic.imgdb.cn/item/613ca61e44eaada7394c5a12.jpg)
+
+**新闻详情页**：
 ![](https://pic.imgdb.cn/item/613cab0644eaada73965bbd6.jpg)
 
 ### Django 
