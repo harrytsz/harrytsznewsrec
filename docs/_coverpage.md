@@ -11,7 +11,7 @@
 - 语音对话: wukong-robot 
 
 ![](https://img.shields.io/badge/MIT-newsrecsys-red.svg)  
-![](https://img.shields.io/badge/download-1K-brightgreen.svg) 
+![](https://img.shields.io/badge/stars-%E2%98%85%E2%98%85%E2%98%85%E2%98%85%E2%98%85-brightgreen.svg) 
 ![](https://img.shields.io/badge/version-v0.0.1-blue.svg)    
 
 [GitHub](https://github.com/harrytsz/)
