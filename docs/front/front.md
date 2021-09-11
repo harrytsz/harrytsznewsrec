@@ -43,6 +43,8 @@ new Vue({
 
 ### Home 
 
+下面是 Home 组件的部分 Vue 代码，通过生命周期函数(俗称钩子函数)自动触发状态更新操作，为完成首页渲染触发后端服务器相应接口获取首页展示所需要的数据。通过双向绑定技术，无刷新实时渲染新页面数据。
+
 ```html
 <template xmlns:cursor="http://www.w3.org/1999/xhtml">
  <div class="recommonContain">
@@ -257,6 +259,8 @@ export default {
 
 ### 新闻展示页面
 
+以下是新闻详情页 Vue 部分代码，用户点击的新闻候选框触发对应的绑定事件，再由钩子函数触发服务器请求获取 newId 对应的新闻详情数据，然后实时渲染到新闻展示页面的模版中。
+
 ```html
 <template>
   <div class="newsContent">
@@ -411,29 +415,6 @@ export default {
     box-sizing: border-box;
     overflow: auto;
   }
-  .mainNews {
-    width: 70%;
-    float: left;
-    padding: 20px;
-    box-sizing: border-box;
-    padding-top: 0;
-  }
-  .newsTitle {
-    font-size: 30px;
-    line-height: 40px;
-    margin: 20px 0;
-    font-weight: 600;
-  }
-  .newsAttribute {
-    display: block;
-    font-size: 18px;
-    color: #999;
-    height: 20px;
-    padding: 1px;
-    flex: 1;
-    text-align: right;
-    margin-right: 100px;
-  }
   .news {
     color: #222222;
     font-size: 18px;
@@ -442,17 +423,6 @@ export default {
     padding: 20px;
     box-sizing: border-box;
   }
-  .mainRight {
-    width: 30%;
-    float: right;
-  }
-  .mainRight > h3 {
-    width: 100%;
-    padding: 10px;
-    margin-top: 15px;
-    background: #63a35c;
-    vertical-align: middle;
-    box-sizing: border-box;
-  }
+
 </style>
 ```
