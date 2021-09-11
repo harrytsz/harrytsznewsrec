@@ -176,3 +176,108 @@ v-if 指令用于条件性地渲染一块内容。这块内容只会在指令的
   <p>Paragraph 2</p>
 </template>
 ```
+
+### 列表渲染
+
+我们可以用 v-for 指令基于一个数组来渲染一个列表。v-for 指令需要使用 item in items 形式的特殊语法，其中 items 是源数据数组，而 item 则是被迭代的数组元素的别名。
+
+```js
+<ul id="example-1">
+  <li v-for="item in items" :key="item.message">
+    {{ item.message }}
+  </li>
+</ul>
+```
+```js
+var example1 = new Vue({
+  el: '#example-1',
+  data: {
+    items: [
+      { message: 'Foo' },
+      { message: 'Bar' }
+    ]
+  }
+})
+```
+
+结果：
+
+```bash
+    - Foo
+    - Bar
+```
+
+在 v-for 块中，我们可以访问所有父作用域的 property。v-for 还支持一个可选的第二个参数，即当前项的索引。
+
+```html
+<ul id="example-2">
+  <li v-for="(item, index) in items">
+    {{ parentMessage }} - {{ index }} - {{ item.message }}
+  </li>
+</ul>
+```
+```js
+var example2 = new Vue({
+  el: '#example-2',
+  data: {
+    parentMessage: 'Parent',
+    items: [
+      { message: 'Foo' },
+      { message: 'Bar' }
+    ]
+  }
+})
+```
+
+结果：
+```bash
+- Parent-0-Foo
+- Parent-1-Bar
+```
+
+你也可以用 of 替代 in 作为分隔符，因为它更接近 JavaScript 迭代器的语法：
+
+```html
+<div v-for="item of items"></div>
+```
+
+#### 在 v-for 里使用对象
+
+你也可以用 v-for 来遍历一个对象的 property。
+
+```html
+<ul id="v-for-object" class="demo">
+  <li v-for="value in object">
+    {{ value }}
+  </li>
+</ul>
+```
+```js
+new Vue({
+  el: '#v-for-object',
+  data: {
+    object: {
+      title: 'How to do lists in Vue',
+      author: 'Jane Doe',
+      publishedAt: '2016-04-10'
+    }
+  }
+})
+```
+
+结果：
+```bash
+How to dolist in Vue
+Jane Doe
+2016-04-10
+```
+
+你也可以提供第二个的参数为 property 名称 (也就是键名)：
+
+```html
+<div v-for="(value, name) in object">
+  {{ name }}: {{ value }}
+</div>
+```
+
+还可以用第三个参数作为索引：
