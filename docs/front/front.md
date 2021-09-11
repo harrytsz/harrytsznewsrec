@@ -426,3 +426,31 @@ export default {
 
 </style>
 ```
+
+### 前段常用的 API
+
+使用 axios 组件解决跨域访问问题，前段绑定的事件通过这些 API 向后端服务器发送相应的数据请求。
+
+```js
+import fetch from '../axios/fetch'
+
+// 主页分类数据
+export const getCateNewsData = (getdata) => fetch('/api/index/home/', getdata, 'get')
+// 主页分类
+export const getCateData = () => fetch('/api/news/cates/', '', 'get')
+// 获取新闻详情
+export const getNewsData = (newsInfo) => fetch('/api/news/one/', newsInfo, 'get')
+// 获取用户以及标签
+export const getLogin = () => fetch('/api/index/login/', '', 'get')
+// 登录
+export const login = (loginInfo) => fetch('/api/index/login/', loginInfo, 'post')
+// 退出切换用户
+export const layout = () => fetch('/api/index/switchuser/', '', 'get')
+
+/// /////////////////////////////////////////////
+
+// facelogin-bak - index
+export const faceHome = () => fetch('/api/facelogin-bak/', '', 'get')
+// facelogin-bak -
+export const faceRecognition = () => fetch('/api/face_recognition/')
+```
