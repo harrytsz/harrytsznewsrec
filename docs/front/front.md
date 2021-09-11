@@ -12,7 +12,7 @@ Vue (读音 /vjuː/，类似于 view) 是一套用于构建用户界面的渐进
 
 
 ### Vue 生命周期函数
-
+<img src="https://cn.vuejs.org/images/lifecycle.png"  height="330" width="495">
 ![](https://cn.vuejs.org/images/lifecycle.png)
 
 ### Element-ui 组件
