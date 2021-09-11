@@ -17,7 +17,8 @@
 ### Django 
 ![](https://pic.imgdb.cn/item/613c80b044eaada739f51aae.jpg)
 
-#### Django 后台管理  
+#### Django 后台管理
+
 ![](https://pic.imgdb.cn/item/613cac0e44eaada7396ac276.jpg)
 
 ### MySQL
