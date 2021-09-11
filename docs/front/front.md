@@ -8,7 +8,7 @@ Vue 是一套用于构建用户界面的渐进式框架。与其它大型框架�
 
 如果你已经是有经验的前端开发者，想知道 Vue 与其它库/框架有哪些区别，请查看对比其它框架。
 
-![](https://pic.imgdb.cn/item/613c74ab44eaada739e1f761.jpg)
+![](https://pic.imgdb.cn/item/613cbe0044eaada739b65801.jpg)
 
 
 ### 实例生命周期钩子
