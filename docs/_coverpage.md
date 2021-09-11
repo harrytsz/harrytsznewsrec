@@ -6,5 +6,6 @@
 ![](https://img.shields.io/badge/MIT-newsrecsys-red)
 [](https://github.com/harrytsz/)
 
+![](https://img.shields.io/badge/download-1K-brightgreen.svg)
 [GitHub](https://github.com/harrytsz/)
 [开始阅读](?id=前言)
