@@ -14,7 +14,7 @@ Vue 是一套用于构建用户界面的渐进式框架。与其它大型框架�
 
 每个 Vue 应用都是通过用 Vue 函数创建一个新的 Vue 实例开始的：
 
-```javascript
+```dart
 var vm = new Vue({
   // 选项
 })
