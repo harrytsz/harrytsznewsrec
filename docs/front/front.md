@@ -27,13 +27,13 @@ var vm = new Vue({
 一个 Vue 应用由一个通过 new Vue 创建的根 Vue 实例，以及可选的嵌套的、可复用的组件树组成。举个例子，一个 todo 应用的组件树可以是这样的：
 
 根实例
-└─ TodoList
-   ├─ TodoItem
-   │  ├─ TodoButtonDelete
-   │  └─ TodoButtonEdit
-   └─ TodoListFooter
-      ├─ TodosButtonClear
-      └─ TodoListStatistics
+└─ TodoList    
+   ├─ TodoItem     
+   │  ├─ TodoButtonDelete    
+   │  └─ TodoButtonEdit   
+   └─ TodoListFooter   
+      ├─ TodosButtonClear   
+      └─ TodoListStatistics   
 
 我们会在稍后的组件系统章节具体展开。不过现在，你只需要明白所有的 Vue 组件都是 Vue 实例，并且接受相同的选项对象 (一些根实例特有的选项除外)。
 
