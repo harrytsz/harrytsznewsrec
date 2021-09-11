@@ -30,6 +30,40 @@ Cocos Creator 将整套手机页游解决方案整合在了编辑器工具里，
 
 ![](https://pic.imgdb.cn/item/613c6cdb44eaada739d3b945.jpg)
 
+```javascript
+// Learn cc.Class:
+//  - https://docs.cocos.com/creator/manual/en/scripting/class.html
+// Learn Attribute:
+//  - https://docs.cocos.com/creator/manual/en/scripting/reference/attributes.html
+// Learn life-cycle callbacks:
+//  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
+cc.Class({
+    extends: cc.Component,
+    // LIFE-CYCLE CALLBACKS:
+    // onLoad () {},
+    properties: {
+        logo: cc.Sprite,
+    },
+    start () {
+        var action = cc.repeatForever(
+            cc.sequence(
+                cc.rotateBy(2, 90),
+                cc.rotateBy(2, -90),
+            )
+            // cc.rotateBy(2, 360),
+        )
+        this.node.runAction(action);
+        setTimeout(() => {
+            this.node.stopAction(action);
+            console.log("Finishing")
+        }, 4000);
+        // this.node.runAction(cc.rotateBy(1, 90));
+        // this.node.runAction(cc.rotateBy(1, -90));
+    },
+    // update (dt) {},
+});
+```
+
 ### 一键预览和发布
 
 搭建场景和开发功能的过程中，你可以随时点击预览来查看当前场景的运行效果。使用手机扫描二维码，可以立即在手机上预览游戏。当开发告一段落时，通过 构建发布 面板可以一键发布游戏到包括桌面、手机、Web 等多个平台。
