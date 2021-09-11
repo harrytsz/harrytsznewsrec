@@ -12,7 +12,7 @@
 
 ![](https://img.shields.io/badge/MIT-newsrecsys-red.svg)  
 ![](https://img.shields.io/badge/download-1K-brightgreen.svg) 
-![](https://img.shields.io/badge/version-v0.0.1-blue)    
+![](https://img.shields.io/badge/version-v0.0.1-blue.svg)    
 
 [GitHub](https://github.com/harrytsz/)
 [开始阅读](?id=前言)
