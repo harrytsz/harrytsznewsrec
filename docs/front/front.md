@@ -279,3 +279,254 @@ Jane Doe
   {{ name }}: {{ value }}
 </div>
 ```
+
+### Home 
+
+```html
+<template xmlns:cursor="http://www.w3.org/1999/xhtml">
+ <div class="recommonContain">
+   <!--引入头部组件，包含头部导航栏-->
+   <newheader :active="isActive" @onGetnews="getCateNews"></newheader>
+   <!--主页面展示区域-->
+   <div class="mainContent">
+     <!--主展示区的左边栏-->
+     <div class="mainLeft">
+       <ul class="leftContent">
+         <el-row class="newsItem"  v-for="item in newsData.news" :key="item.new_id" @click.native="newsDesc({'newid':item.new_id, 'cateid': newsData.cate_id})">
+           <h3 class="newsTitle">
+             {{item.new_title}}
+             <span class="newsOther">{{item.new_time}}</span>
+             <span v-if="isActive==1" class="newsCate"><i class="el-icon-loading
+"></i> {{item.new_cate}}</span>
+           </h3>
+           <p class="newsContent">{{item.new_content}}</p>
+         </el-row>
+         <div v-if="morebtn & isActive==1" class="moreBtn">
+           <!--<span @click="showMore">加载更多</span>-->
+           <el-button type="primary" @click="showMore">加载更多</el-button>
+         </div>
+         <li class="moreNewsItem" v-if="moreRecommon" v-for="item in newsOtherdata.news" :key="item.new_id+10" @click="newsDesc({'newid':item.new_id,'cateid':newsData.cate_id})">
+           <h3 class="newsTitle">
+             {{item.new_title}}
+             <span class="newsOther">{{item.new_time}}</span>
+             <span class="newsCate">{{item.new_cate}}</span>
+           </h3>
+           <p class="newsContent">{{item.new_content}}</p>
+         </li>
+       </ul>
+       <pagnation v-if="total>10" :total="total" :current-page="current" :refresh="refresh" @pagechange="pagechange"></pagnation>
+     </div>
+     <!--主展示区的右边栏-->
+     <div class="mainRight">
+       <h3 class="hotTitle">{{hot_newsData.cate_name}}</h3>
+       <ul class="rightContent">
+         <li class="animated fadeInRight" style="animation-duration:1s;animation-delay:0s" v-for="item in hot_newsData.news" @click="newsDesc({'newid':item.new_id,'cateid':newsData.cate_id})" :key="item.new_id">
+           <span>{{item.new_title}}</span>
+           <i>{{item.new_time}}</i>
+         </li>
+       </ul>
+     </div>
+   </div>
+   <!--引入尾部组件，包含尾部信息-->
+   <newfooter class="footer"></newfooter>
+ </div>
+</template>
+
+<script>
+import Header from './Header'
+import Footer from './Footer'
+import Pagnation from '../components/Pagnation'
+import {getCateNewsData} from '../router/apis'
+
+export default {
+  name: 'Home',
+  data () {
+    return {
+      isActive: true,
+      morebtn: false,
+      moreRecommon: false,
+      newsData: {
+      },
+      newsOtherdata: {
+      },
+      hot_newsData: {},
+      // 分页相关参数
+      total: 0, // 总条数
+      current: 1, // 当前激活页
+      display: 3, // 每页显示多少条
+      refresh: false // 是否刷新（第一页激活）有搜索时需要
+    }
+  },
+  components: {
+    'newheader': Header,
+    'newfooter': Footer,
+    'pagnation': Pagnation
+  },
+  methods: {
+    getCateNews: function (option) {
+      let cateId = option.cateid
+      let getdata = {}
+      if (cateId === '2') {
+        // this.loading('加载中。。。')
+        getdata = {
+          cateid: '2',
+          userName: this.$store.state.vuexlogin.userName
+        }
+        getCateNewsData(getdata).then((res) => {
+          if (!res.code) {
+            this.$children[0].layout()
+          } else {
+            res.news.forEach((item) => {
+              this.$layer.closeAll()
+              item.new_time = this.timeFormat(item.new_time)
+            })
+            this.total = res.total
+            this.hot_newsData = res
+          }
+          // eslint-disable-next-line handle-callback-err
+        }, (err) => {
+          this.$layer.msg('小主稍等，紧急恢复中。。。')
+        })
+      } else if (cateId === '1') {
+        // this.loading('加载中。。。')
+        if (option.tags) {
+          getdata.tags = option.tags
+          getdata.baseclick = option.baseclick
+        } else {
+          getdata.tags = ''
+          getdata.baseclick = option.baseclick
+        }
+        if (option.baseclick === '0') {
+          getdata.baseclick = 0
+        } else {
+          getdata.baseclick = 1
+        }
+        getdata.cateid = '1'
+        this.isActive = cateId
+        getdata.userName = this.$store.state.vuexlogin.userName
+        getCateNewsData(getdata).then((res) => {
+          this.$layer.closeAll()
+          if (!res.code) {
+            this.$children[0].layout()
+          } else {
+            res.news.forEach((item) => {
+              item.new_time = this.timeFormat(item.new_time)
+            })
+            this.total = res.total
+            this.newsData = res
+            if (res.news.length >= 10) {
+              let arr1 = res.news.slice(0, 10)
+              let arr2 = res.news.slice(11)
+              this.newsData.news = arr1
+              this.newsOtherdata.news = arr2
+              this.morebtn = true
+            } else {
+              this.newsData = res
+              this.newsOtherdata = {}
+              this.morebtn = false
+            }
+          }
+          // eslint-disable-next-line handle-callback-err
+        }, (err) => {
+          this.$layer.msg('小主稍等，紧急恢复中。。。')
+        })
+      } else {
+        // this.loading('加载中。。。')
+        if (cateId) {
+          getdata.cateid = cateId
+          this.isActive = cateId
+        }
+        if (option.pageid) {
+          getdata.pageid = option.pageid
+        } else {
+          getdata.pageid = 1
+        }
+        getdata.userName = this.$store.state.vuexlogin.userName
+        getCateNewsData(getdata).then((res) => {
+          this.$layer.closeAll()
+          if (!res.code) {
+            this.$children[0].layout()
+          } else {
+            res.news.forEach((item) => {
+              item.new_time = this.timeFormat(item.new_time)
+            })
+            this.total = res.total
+            this.newsData = res
+          }
+          // eslint-disable-next-line handle-callback-err
+        }, (err) => {
+          this.$layer.msg('小主稍等，紧急恢复中。。。')
+        })
+      }
+    },
+    newsDesc: function (opt) {
+      console.log('获取新闻')
+      this.$router.push({
+        name: 'news',
+        query: {cateid: opt.cateid, newid: opt.newid}
+      })
+    },
+    // 推荐更多
+    showMore () {
+      this.moreRecommon = true
+      this.morebtn = false
+    },
+    // 分页
+    pagechange (currentPage) {
+      this.refresh = false
+      this.page = currentPage
+      // 滚到顶部，注意不在 window 而在 document.documentElement
+      document.documentElement.scrollTop = 0
+      document.body.scrollTop = 0
+      // 获取列表，可根据后端要求改变 page 的方式
+      this.getCateNews({'pageid': this.page, 'cateid': this.isActive})
+    },
+    // 无序字典 news 排序
+    compareDescSort: function (property) {
+      return function (a, b) {
+        var value1 = a[property]
+        var value2 = b[property]
+        return value2 - value1
+      }
+    }
+  },
+  mounted () {
+    this.getCateNews({'cateid': '2'})
+    var tags = this.$route.query.tags
+    var baseclick = this.$route.query.baseclick + ''
+    if (this.$route.params.cateid) {
+      this.getCateNews({'cateid': this.$route.params.cateid})
+    } else {
+      this.getCateNews({'cateid': '1', 'tags': tags, 'baseclick': baseclick})
+    }
+  }
+}
+</script>
+
+<style scoped="scoped">
+  .el-header {
+    background: rgb(55, 61, 65);
+    display: flex;
+    justify-content: space-between;
+    line-height: 60px;
+    color: #fff;
+    font-size: 22px;
+  }
+  .recommonContain {
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #fff;  /*新闻显示区域背景颜色*/
+    display: flex;
+  }
+  .mainContent {
+    width: 100%;
+    display: flex;
+    box-sizing: border-box;
+    flex: 1;
+  }
+  .mainLeft {
+    width: 60%;
+    box-sizing: border-box;
+  }
+</style>
+```
