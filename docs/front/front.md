@@ -155,13 +155,13 @@ new Vue({
 
 v-if 指令用于条件性地渲染一块内容。这块内容只会在指令的表达式返回 truthy 值的时候被渲染。
 
-```js
+```html
 <h1 v-if="awesome">Vue is awesome!</h1>
 ```
 
 也可以用 v-else 添加一个“else 块”：
 
-```js
+```html
 <h1 v-if="awesome">Vue is awesome!</h1>
 <h1 v-else>Oh no 😢</h1>
 ```
@@ -169,7 +169,7 @@ v-if 指令用于条件性地渲染一块内容。这块内容只会在指令的
 在 template 元素上使用 v-if 条件渲染分组
 因为 v-if 是一个指令，所以必须将它添加到一个元素上。但是如果想切换多个元素呢？此时可以把一个 template 元素当做不可见的包裹元素，并在上面使用 v-if。最终的渲染结果将不包含 template 元素。
 
-```js
+```html
 <template v-if="ok">
   <h1>Title</h1>
   <p>Paragraph 1</p>
@@ -181,7 +181,7 @@ v-if 指令用于条件性地渲染一块内容。这块内容只会在指令的
 
 我们可以用 v-for 指令基于一个数组来渲染一个列表。v-for 指令需要使用 item in items 形式的特殊语法，其中 items 是源数据数组，而 item 则是被迭代的数组元素的别名。
 
-```js
+```html
 <ul id="example-1">
   <li v-for="item in items" :key="item.message">
     {{ item.message }}
@@ -203,8 +203,8 @@ var example1 = new Vue({
 结果：
 
 ```bash
-    - Foo
-    - Bar
+Foo
+Bar
 ```
 
 在 v-for 块中，我们可以访问所有父作用域的 property。v-for 还支持一个可选的第二个参数，即当前项的索引。
@@ -231,8 +231,8 @@ var example2 = new Vue({
 
 结果：
 ```bash
-- Parent-0-Foo
-- Parent-1-Bar
+Parent-0-Foo
+Parent-1-Bar
 ```
 
 你也可以用 of 替代 in 作为分隔符，因为它更接近 JavaScript 迭代器的语法：
