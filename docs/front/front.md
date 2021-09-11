@@ -149,5 +149,3 @@ new Vue({
 <div align="center">
 <img src="https://cn.vuejs.org/images/lifecycle.png"  height="1000" width="400">
 </div>
-
-![](https://cn.vuejs.org/images/lifecycle.png)
