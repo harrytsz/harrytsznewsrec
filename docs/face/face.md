@@ -48,7 +48,7 @@ https://www.zhihu.com/question/314169580/answer/872770507
 
 
 
-```python
+```Python
 # part1
 # 识别图片中的人是谁
 
