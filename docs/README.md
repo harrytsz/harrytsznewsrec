@@ -5,5 +5,5 @@
 ## 网站引导页面
 
 ![](https://pic.imgdb.cn/item/613c57c844eaada739ac3bd9.jpg)
-![home](https://gitee.com/harrytsz/harrytszBlogPics/raw/master/uPic/home.gif)
+
 
