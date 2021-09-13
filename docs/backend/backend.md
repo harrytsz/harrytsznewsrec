@@ -7,7 +7,7 @@
 ##### 用户名密码登录
 ![](https://pic.imgdb.cn/item/613cb6f944eaada739a1bf03.jpg)
 
-##### 人脸识别登录
+##### [人脸识别登录](face/face?id=人脸识别)
 ![](https://pic.imgdb.cn/item/613cb41b44eaada7399327c4.jpg)
 ![](https://pic.imgdb.cn/item/613cb62444eaada7399dcef9.jpg)
 
