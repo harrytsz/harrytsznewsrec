@@ -20,7 +20,7 @@
 ### Django 
 ![](https://pic.imgdb.cn/item/613c80b044eaada739f51aae.jpg)
 
-#### Django 后台管理
+#### Django后台管理
 
 ![](https://pic.imgdb.cn/item/613cb78444eaada739a46754.jpg)
 ![](https://pic.imgdb.cn/item/613cad3b44eaada73970c96d.jpg)
@@ -28,7 +28,7 @@
 ### MySQL
 ![](https://pic.imgdb.cn/item/613c80ef44eaada739f57e14.jpg)
 
-#### MySQL 中的字段
+#### MySQL中的字段
 ![](https://pic.imgdb.cn/item/613cb8dc44eaada739aa8e5c.jpg)
 
 ### 缓存部分
