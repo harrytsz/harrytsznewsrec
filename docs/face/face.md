@@ -46,7 +46,7 @@ https://www.zhihu.com/question/314169580/answer/872770507
 
 ## part1.识别图片中的人是谁
 
-
+![](https://pic.imgdb.cn/item/613ed0de44eaada739c0e76e.jpg)
 
 ```Python
 # part1
@@ -224,6 +224,8 @@ A face is located at pixel location Top: 205, Left: 276, Bottom: 440, Right: 512
 
 
 ## part4.识别单张图片中人脸的关键点
+
+![](https://pic.imgdb.cn/item/613ed32c44eaada739c40476.jpg)
 
 ```python
 # part4　识别单张图片中人脸的关键点
