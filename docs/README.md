@@ -14,8 +14,8 @@
 
 ## 人工智能模块
 
-### 人脸识别
+### [人脸识别](face/face?id=人脸识别)
 
-### 语音模块
+### [语音模块](speech/speech?id=语音处理模块)
 
-### 智能聊天
+### [智能聊天](speech/speech?id=_2-搭建-wukong-robot-运行环境)
