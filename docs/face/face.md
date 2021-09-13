@@ -12,8 +12,8 @@ face_recognition 是一个强大、简单、易上手的人脸识别开源项目
 
 下面两个链接划重点
 
-https://github.com/ageitgey/face_recognition/blob/master/README_Simplified_Chinese.md
-https://face-recognition.readthedocs.io/en/latest/face_recognition.html
+[Github](https://github.com/ageitgey/face_recognition/blob/master/README_Simplified_Chinese.md)
+[face-recognition](https://face-recognition.readthedocs.io/en/latest/face_recognition.html)
 
 ## 环境配置
 
