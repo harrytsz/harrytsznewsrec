@@ -6,7 +6,7 @@
 
 ![](https://pic.imgdb.cn/item/613ec12144eaada739aa7fd3.jpg)
 
-## [新闻详情页面](./backend/backend###新闻详情页)
+## [新闻详情页面](./backend/backend/###新闻详情页)
 
 ## 后台管理页面
 
