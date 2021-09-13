@@ -9,7 +9,7 @@
 ## [新闻详情页面](backend/backend?id=新闻详情页)
 ![](https://pic.imgdb.cn/item/613ca61e44eaada7394c5a12.jpg)
 
-## [后台管理页面](backend/backend?id=Django 后台管理)
+## [后台管理页面](backend/backend?id=Django后台管理)
 ![](https://pic.imgdb.cn/item/613cad3b44eaada73970c96d.jpg)
 
 ## 人工智能模块
