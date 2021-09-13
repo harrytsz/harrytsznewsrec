@@ -11,7 +11,7 @@
 ![](https://pic.imgdb.cn/item/613cb41b44eaada7399327c4.jpg)
 ![](https://pic.imgdb.cn/item/613cb62444eaada7399dcef9.jpg)
 
-### 新闻页
+### 新闻详情页
 ![](https://pic.imgdb.cn/item/613ca61e44eaada7394c5a12.jpg)
 
 **新闻详情页**：
