@@ -1,19 +1,24 @@
 ##  人脸识别
 
 ## 前言
-
-face_recognition 是一个强大、简单、易上手的人脸识别开源项目，并且配备了完整的开发文档和应用案例，特别是兼容树莓派系统。本项目是世界上最简洁的人脸识别库，你可以使用 Python 和命令行工具提取、识别、操作人脸。本项目的人脸识别是基于业内领先的 C++ 开源库 dlib 中的深度学习模型，用 Labeled Faces in the Wild 人脸数据集进行测试，有高达 99.38% 的准确率。但对小孩和亚洲人脸的识别准确率尚待提升。
+> [!TIP]
+> face_recognition 是一个强大、简单、易上手的人脸识别开源项目，并且配备了完整的开发文档和应用案例，特别是兼容树莓派系统。本项目是世界上最简洁的人脸识别库，你可以使用 Python 和命令行工具提取、识别、操作人脸。本项目的人脸识别是基于业内领先的 C++ 开源库 dlib 中的深度学习模型，用 Labeled Faces in the Wild 人脸数据集进行测试，有高达 99.38% 的准确率。但对小孩和亚洲人脸的识别准确率尚待提升。
 
 ## 安装 face_recognition：
 
-```python
-pip3 install face_recognition
+首先安装 face_recognition 库：
+
+```bash
+pip install face_recognition
 ```
 
 ![](https://img-blog.csdnimg.cn/img_convert/a4c0ed01a16a924c04ef9bd62dcb5ead.png)
 
 实际上只需要安装 face_recognition，当然，没有 opencv 的也需要安装一下 opencv。
 
+```bash
+pip install opencv-python
+```
 
 ## 从图片中找到人脸
 
