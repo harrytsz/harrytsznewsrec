@@ -15,7 +15,7 @@
 ## 人工智能模块
 
 ### [人脸识别](face/face?id=人脸识别)
-![](https://pic.imgdb.cn/item/613ecd8344eaada739bc5e2b.jpg)
+![](https://pic.imgdb.cn/item/613ed0de44eaada739c0e76e.jpg)
 ### [语音模块](speech/speech?id=语音处理模块)
 
 ### [智能聊天](speech/speech?id=_2-搭建-wukong-robot-运行环境)
