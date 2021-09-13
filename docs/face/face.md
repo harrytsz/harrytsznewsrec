@@ -46,7 +46,7 @@ https://www.zhihu.com/question/314169580/answer/872770507
 
 ## part1.识别图片中的人是谁
 
-![](https://pic.imgdb.cn/item/613ed0de44eaada739c0e76e.jpg)
+![](https://pic.imgdb.cn/item/613ed47b44eaada739c5c395.jpg)
 
 ```Python
 # part1
@@ -84,7 +84,7 @@ yes
 
 ## part2.从图片中找到人脸
 
-
+![](https://pic.imgdb.cn/item/613ed4c644eaada739c62cf8.jpg)
 
 ```python
 # part2
