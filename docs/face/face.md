@@ -2,193 +2,52 @@
 
 ## 前言
 
-之前实践了下face++在线人脸识别版本，这回做一下离线版本。github 上面有关于face_recognition的相关资料，本人只是做个搬运工，对其中的一些内容进行搬运，对其中一些例子进行实现。
-
-## 官方描述：
-
 face_recognition 是一个强大、简单、易上手的人脸识别开源项目，并且配备了完整的开发文档和应用案例，特别是兼容树莓派系统。本项目是世界上最简洁的人脸识别库，你可以使用 Python 和命令行工具提取、识别、操作人脸。本项目的人脸识别是基于业内领先的 C++ 开源库 dlib 中的深度学习模型，用 Labeled Faces in the Wild 人脸数据集进行测试，有高达 99.38% 的准确率。但对小孩和亚洲人脸的识别准确率尚待提升。
 
-（关于兼容树莓派，以后有板子了再做一下）
-
-下面两个链接划重点
-
-[Github](https://github.com/ageitgey/face_recognition/blob/master/README_Simplified_Chinese.md)
-[face-recognition](https://face-recognition.readthedocs.io/en/latest/face_recognition.html)
-
-## 环境配置
-
-- ubuntu16.04（其他环境的安装可以参考第一个链接，官方有说明）
-- pycharm (可忽略,怎么舒服怎么来)
-- python3
-- opencv (我的是4.1.2，三点几的版本应该也一样）
-
-实际上只需要安装 face_recognition，当然，没有 opencv 的也需要安装一下 opencv
+## 安装 face_recognition：
 
 ```python
 pip3 install face_recognition
 ```
 
-## 图片准备
-
-由于需要做一些图片的比对，因此需要准备一些图片，本文图片取自以下链接
-
-https://www.zhihu.com/question/314169580/answer/872770507
-
-## 接下来开始操作
-
-官方还有提供命令行的操作（这个没去做），本文不做这个，我们只要是要在python中用face_recognition，因此定位到这一块。
-
-这个api文档地址就是上面的第二个链接。进去之后可以看到：
-
 ![](https://img-blog.csdnimg.cn/img_convert/a4c0ed01a16a924c04ef9bd62dcb5ead.png)
 
+实际上只需要安装 face_recognition，当然，没有 opencv 的也需要安装一下 opencv。
 
 
-## part1.识别图片中的人是谁
+## 从图片中找到人脸
 
-![](https://pic.imgdb.cn/item/613ed47b44eaada739c5c395.jpg)
-
-```Python
-# part1
-# 识别图片中的人是谁
-
-import face_recognition
-known_image = face_recognition.load_image_file("lyf1.jpg")
-unknown_image = face_recognition.load_image_file("lyf2.jpg")
-
-lyf_encoding = face_recognition.face_encodings(known_image)[0]
-unknown_encoding = face_recognition.face_encodings(unknown_image)[0]
-
-results = face_recognition.compare_faces([lyf_encoding], unknown_encoding)	
-# A list of True/False values indicating which known_face_encodings match the face encoding to check
-
-print(type(results))
-print(results)
-
-if results[0] == True:
-    print("yes")
-else:
-    print("no")
-
-```
-
-**结果**
-
-```bash
-<class 'list'>
-[True]
-yes
-```
-
-
-
-## part2.从图片中找到人脸
-
-![](https://pic.imgdb.cn/item/613ed4c644eaada739c62cf8.jpg)
+![](https://pic.imgdb.cn/item/613ee12444eaada739d8f6a5.jpg)
 
 ```python
-# part2
 # 从图片中找到人脸（定位人脸位置）
-
 import face_recognition
-import cv2
+import  cv2
+#加载图像文件
+image = face_recognition.load_image_file("./lyf.png")
+image2 = cv2.cvtColor(image,cv2.COLOR_BGR2RGB)
+cv2.imshow("src",image2)
 
-image = face_recognition.load_image_file("lyf1.jpg")
-
-face_locations_useCNN = face_recognition.face_locations(image,model='cnn')
-# model – Which face detection model to use. “hog” is less accurate but faster on CPUs.
-# “cnn” is a more accurate deep-learning model which is GPU/CUDA accelerated (if available). The default is “hog”.
-
-face_locations_noCNN=face_recognition.face_locations(image)
-# A list of tuples of found face locations in css (top, right, bottom, left) order
-# 因为返回值的顺序是这样子的，因此在后面的for循环里面赋值要注意按这个顺序来
-
-print("face_location_useCNN:")
-print(face_locations_useCNN)
-face_num1=len(face_locations_useCNN)
-print(face_num1)       # The number of faces
-
-
-print("face_location_noCNN:")
-print(face_locations_noCNN)
-face_num2=len(face_locations_noCNN)
-print(face_num2)       # The number of faces
-# 到这里为止，可以观察两种情况的坐标和人脸数，一般来说，坐标会不一样，但是检测出来的人脸数应该是一样的
-# 也就是说face_num1　＝　face_num２；　face_locations_useCNN　和　face_locations_noCNN　不一样
-
-
-org = cv2.imread("lyf1.jpg")
-img = cv2.imread("lyf1.jpg")
-cv2.imshow("lyf1.jpg",img)  # 原始图片
-
-# Go to get the data and draw the rectangle
-# use CNN
-for i in range(0,face_num1):
-    top = face_locations_useCNN[i][0]
-    right = face_locations_useCNN[i][1]
-    bottom = face_locations_useCNN[i][2]
-    left = face_locations_useCNN[i][3]
-
-    start = (left, top)
-    end = (right, bottom)
-
-    color = (0,255,255)
-    thickness = 2
-    cv2.rectangle(img, start, end, color, thickness)    # opencv 里面画矩形的函数
-
-# Show the result
-cv2.imshow("useCNN",img)
-
-
-# for face_location in face_locations_noCNN:
-#
-#     # Print the location of each face in this image
-#     top, right, bottom, left = face_location
-# # 等价于下面的这种写法
-
-for i in range(0,face_num2):
-    top = face_locations_noCNN[i][0]
-    right = face_locations_noCNN[i][1]
-    bottom = face_locations_noCNN[i][2]
-    left = face_locations_noCNN[i][3]
-
-    start = (left, top)
-    end = (right, bottom)
-
-    color = (0,255,255)
-    thickness = 2
-    cv2.rectangle(org, start, end, color, thickness)
-
-cv2.imshow("no cnn ",org)
-
+face_locations = face_recognition.face_locations(image)
+# 循环找到的所有人脸
+for face_location in face_locations:
+        # 打印每张脸的位置信息
+        top, right, bottom, left = face_location
+        print("A face is located at pixel location Top: {}, Left: {}, Bottom: {}, Right: {}".format(top, left, bottom, right))
+        # 指定人脸的位置信息，然后显示人脸图片
+        # face_image = image2[top:bottom, left:right]
+        # cv2.imshow("src2", face_image)
+        # 矩形框
+        cv2.rectangle(image2, (left, top), (right, bottom), (0, 0, 255), 2)
+cv2.imshow("dest",image2)
 cv2.waitKey(0)
-cv2.destroyAllWindows()
-
 ```
 
-**结果**
+## 定位人脸
 
-```bash
-face_location_useCNN:
-[(223, 470, 427, 266)]
-1
-face_location_noCNN:
-[(242, 489, 464, 266)]
-1
-```
-
-**图片效果大致是这样**
-
-![](https://img-blog.csdnimg.cn/img_convert/66fea37543a40c377a1b58e6ade12bb7.png)
-
-
-
-## part3.找到人脸并将其裁剪打印出来（使用 cnn 定位人脸）
-
-
+![](https://img-blog.csdnimg.cn/img_convert/328a00865f5edf1f66b9ce12395035e5.png)
 
 ```python
-# part3
 # 找到人脸并将其裁剪打印出来（使用cnn定位人脸）
 
 from PIL import Image
@@ -196,68 +55,58 @@ import face_recognition
 
 # Load the jpg file into a numpy array
 image = face_recognition.load_image_file("lyf1.jpg")
-
 face_locations = face_recognition.face_locations(image, number_of_times_to_upsample=0, model="cnn")
-
-print("I found {} face(s) in this photograph.".format(len(face_locations)))
 
 for face_location in face_locations:
     top, right, bottom, left = face_location
-    print("A face is located at pixel location Top: {}, Left: {}, Bottom: {}, Right: {}".format(top, left, bottom, right))
-
     face_image = image[top:bottom, left:right]
     pil_image = Image.fromarray(face_image)
     pil_image.show()
 ```
 
-**结果**
 
-```bash
-I found 1 face(s) in this photograph.
-A face is located at pixel location Top: 205, Left: 276, Bottom: 440, Right: 512
-```
+## 识别单张图片中人脸的关键点
 
-*图片效果大致是这样*
+调用face_recognition.face_landmarks(image)可识别出人脸关键点信息，包括眼睛、鼻子、嘴巴和下巴等
+返回值是包含面部特征字典的列表，列表中每一项对应一张人脸，包括nose_bridge、right_eyebrow、right_eye、chine、left_eyebrow、bottom_lip、nose_tip、top_lip、left_eye几个部分，每个部分包含若干个特征点(x,y)，总共有 68 个特征点。
 
-![](https://img-blog.csdnimg.cn/img_convert/328a00865f5edf1f66b9ce12395035e5.png)
-
-
-
-## part4.识别单张图片中人脸的关键点
-
-![](https://pic.imgdb.cn/item/613ed32c44eaada739c40476.jpg)
+![](https://pic.imgdb.cn/item/613ee52c44eaada739df7995.jpg)
 
 ```python
-# part4　识别单张图片中人脸的关键点
-
-from PIL import Image, ImageDraw
+import cv2
 import face_recognition
-
-# Load the jpg file into a numpy array
+#加载图像文件
 image = face_recognition.load_image_file("lyf1.jpg")
+image2 = cv2.cvtColor(image,cv2.COLOR_BGR2RGB)
 
-# Find all facial features in all the faces in the image
 face_landmarks_list = face_recognition.face_landmarks(image)
-# print(face_landmarks_list)
 
-print("I found {} face(s) in this photograph.".format(len(face_landmarks_list)))
-
-# Create a PIL imagedraw object so we can draw on the picture
-pil_image = Image.fromarray(image)
-d = ImageDraw.Draw(pil_image)
+facial_features = [
+        'chin',
+        'left_eyebrow',
+        'right_eyebrow',
+        'nose_bridge',
+        'nose_tip',
+        'left_eye',
+        'right_eye',
+        'top_lip',
+        'bottom_lip'
+    ]
+thickness = 2
+point_size = 1
+point_color = (0, 255, 0)  # BGR
 
 for face_landmarks in face_landmarks_list:
 
-    # Print the location of each facial feature in this image
-    for facial_feature in face_landmarks.keys():
-        print("The {} in this face has the following points: {}".format(facial_feature, face_landmarks[facial_feature]))
+    for facial_feature in  face_landmarks:
+        points_list = face_landmarks[facial_feature]
+        print("The {} in this face has the following points: {}".format(facial_feature, points_list))
+        # 在图像中画出每个人脸特征！
+        for point in points_list:
+            cv2.circle(image2, point, point_size, point_color, thickness)
 
-    # Let's trace out each facial feature in the image with a line!
-    for facial_feature in face_landmarks.keys():
-        d.line(face_landmarks[facial_feature], width=5)
-
-# Show the picture
-pil_image.show()
+cv2.imshow("dest",image2)
+cv2.waitKey(0)
 ```
 
 **结果**
@@ -274,7 +123,71 @@ The top_lip in this face has the following points: [(364, 412), (377, 407), (389
 The left_eye in this face has the following points: [(327, 308), (339, 304), (353, 306), (364, 314), (352, 317), (338, 316)]
 The nose_tip in this face has the following points: [(375, 383), (386, 387), (396, 390), (407, 385), (416, 381)]
 ```
+face_encodings() 面部编码
 
-**图片效果**
+```pthon
+import face_recognition
+#加载图像文件
+image = face_recognition.load_image_file("images/ldh2.jpg")
 
-![](https://img-blog.csdnimg.cn/img_convert/df965ed41b7988ca3431739b9dabc422.png)
+face_encodings = face_recognition.face_encodings(image)
+for face_encoding in face_encodings:
+    print("face_encoding len = {} \nencoding:{}\n\n".format(len(face_encoding),face_encoding))
+```
+```bash
+face_encoding len = 128
+encoding:[-0.12857245 0.2251953 -0.05680346 -0.009356 -0.07961649 -0.01976449
+-0.03006363 -0.2188953 0.18227896 -0.06380306 0.23052536 -0.00517259
+-0.24484953 -0.1024491 -0.07127093 0.10542907 -0.15712184 -0.24606238
+-0.04181587 0.01180026 0.09390671 0.01014723 0.03316356 0.08216273
+-0.08543567 -0.27527595 -0.10761252 -0.08561324 0.09562894 -0.06388975
+-0.07860459 -0.01040951 -0.21186014 -0.10162984 0.09300554 0.08929634
+-0.01133628 -0.02549033 0.25640246 -0.03459882 -0.22288607 0.06690408
+0.05515105 0.31292963 0.14994277 0.06461242 0.00211182 -0.18974975
+0.11956067 -0.07477805 0.09382927 0.21616243 0.18040094 0.02733615
+0.03574533 -0.20213988 -0.00134893 0.08189995 -0.1417242 -0.00179647
+0.10290838 -0.06461908 -0.01702856 -0.11400557 0.20824584 0.04568703
+-0.07567319 -0.24240926 0.12750657 -0.16503944 -0.10546687 0.14743967
+-0.13195604 -0.13922986 -0.26378733 -0.00479815 0.42761648 0.13261758
+-0.17136547 0.09223576 -0.04313177 -0.03386433 0.07099032 0.1085121
+-0.10494502 0.06504983 -0.15515642 -0.00395807 0.2313281 -0.01442198
+-0.08458654 0.14688034 -0.00217457 0.07351732 0.06130501 0.01452726
+-0.10001963 0.01601498 -0.12459313 -0.06574792 0.00460516 -0.01154638
+-0.00899489 0.13434561 -0.14506203 0.06423949 -0.01264461 0.03912276
+-0.06142928 0.01014899 -0.07765882 -0.04298633 0.10122736 -0.29780281
+0.25160897 0.09939459 0.02078611 0.08443137 0.10742732 0.06015015
+-0.00302691 -0.00466454 -0.20120506 -0.10478879 0.12094288 -0.0389271
+0.19183818 -0.00275789]
+```
+
+## 人脸匹配
+compare_faces()方法可匹配两个面部特征编码，利用两个向量的内积来衡量相似度，根据阈值确认是否是同一人脸。
+- 第一个参数给出一个面部编码列表（很多张脸）
+- 第二个参数给出单个面部编码（一张脸）
+- **默认参数**：tolerance=0.6,可根据自己需求更改，tolerance越小匹配越严格
+
+匹配成功的脸返回True，匹配失败的返回False，顺序与第一个参数中脸的顺序一致
+
+![](https://pic.imgdb.cn/item/613ed47b44eaada739c5c395.jpg)
+
+```python
+import face_recognition
+known_image = face_recognition.load_image_file("pic1.jpg")
+unknown_image = face_recognition.load_image_file("pic2.jpg")
+
+pic_encoding = face_recognition.face_encodings(known_image)[0]
+unknown_encoding = face_recognition.face_encodings(unknown_image)[0]
+
+results = face_recognition.compare_faces([pic_encoding], unknown_encoding, tolerance =0.25)    
+# A list of True/False valus indicating which known_face_encodings match the face encoding to check
+
+print(type(results))
+print(results)
+
+if results[0] == True:
+    print("yes")
+else:
+    print("no")
+```
+
+
